@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoE-DSC – AI proof of concept</title>
+<meta name="description" content="Proof of concept: AI-assisted deep dives and chat on the CoE-DSC homepage.">
+<link rel="icon" href="assets/logo-coe-dsc.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#" aria-label="CoE-DSC home"><img src="assets/logo-coe-dsc.svg" alt="CoE DSC"></a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" id="burger"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="#">About</a>
+      <a href="#">Get Involved</a>
+      <a href="#" class="has-sub">DPP</a>
+      <a href="#">Use cases</a>
+      <a href="#">Insights</a>
+      <a href="#">Knowledge base</a>
+      <a href="#" class="has-sub">Events &amp; Webinars</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <form class="site-search" role="search" onsubmit="return false">
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <input type="search" placeholder="Search..." aria-label="Search">
+    </form>
+  </div>
+</header>
+
+<!-- ============ CHAT BAR ============ -->
+<section class="chatbar" id="chatbar" aria-label="Ask a question">
+  <div class="chatbar-inner">
+    <form class="chat-form" id="chatForm" autocomplete="off">
+      <span class="spark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l2.2 6.3L20.5 10l-6.3 1.7L12 18l-2.2-6.3L3.5 10l6.3-1.7z" fill="currentColor"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z" fill="currentColor"/></svg>
+      </span>
+      <input id="chatInput" type="text" placeholder="Ask a question about data sharing…" aria-label="Ask a question" aria-expanded="false" aria-controls="suggestions">
+      <button type="submit" class="chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="suggestions" id="suggestions" role="listbox" hidden>
+        <li role="option" data-q="I want to start a dataspace, draft a short to-do list">I want to start a dataspace, draft a short to-do list</li>
+        <li role="option" data-q="What is the difference between a data space and a data platform?">What is the difference between a data space and a data platform?</li>
+        <li role="option" data-q="Which upcoming events should I attend to learn about data sharing?">Which upcoming events should I attend to learn about data sharing?</li>
+        <li role="option" data-q="How can my organisation join the CoE-DSC community?">How can my organisation join the CoE-DSC community?</li>
+      </ul>
+    </form>
+
+    <!-- answer panel -->
+    <div class="chat-panel" id="chatPanel" hidden>
+      <button class="panel-close" id="chatClose" aria-label="Close answer">&times;</button>
+      <div class="msg msg-user" id="msgUser"></div>
+      <div class="msg msg-ai">
+        <div class="thinking" id="thinking" aria-live="polite"><span class="dots"><i></i><i></i><i></i></span> Thinking…</div>
+        <div class="answer" id="answer" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <img class="shape-left" src="assets/shape-left.svg" alt="">
+  <img class="shape-right" src="assets/shapre-right.svg" alt="">
+  <div class="hero-inner">
+    <h1>Centre of Excellence for Data Sharing &amp; Cloud (CoE-DSC)</h1>
+  </div>
+</section>
+
+<!-- ============ WHO WE ARE ============ -->
+<section class="who">
+  <div class="who-inner">
+    <div class="who-text">
+      <h2 class="dots-title">Who we are</h2>
+      <h3>One central hub in the Netherlands to find answers to <span class="deep deep--soon" tabindex="0" data-soon>data sharing</span> and cloud challenges</h3>
+      <p>The Centre of Excellence for Data Sharing &amp; Cloud (CoE-DSC) supports organisations with establishing <span class="deep" tabindex="0" data-topic="trust-mechanisms">trust mechanisms</span> for secure and trusted data sharing and usage of cloud, ensuring that they can tap into the business opportunities this transformative practice offers. Our mission is to unlock the true value of data sharing by supporting organisations in realising scalable <span class="deep deep--soon" tabindex="0" data-soon>data spaces</span>, the next evolutionary concept in data sharing. Through the development of generic <span class="deep deep--soon" tabindex="0" data-soon>building blocks</span> and collaborative efforts, we enable easier and cost-effective implementation of data spaces across sectors and geographies.</p>
+      <h3>Support creating economic and social value</h3>
+      <p>The CoE-DSC is the central hub in the Netherlands to find answers to data sharing and cloud challenges. We bring together the expertise and achievements of parties like the IDSA hub, the data sharing working group <a href="#">AIC4NL</a> and the Gaia-X Hub Netherlands. By uniting forces, we aim to prevent fragmentation and provide the Dutch data sharing community with a centralised hub of knowledge, tools, use cases and expertise. In this way we support the developments of <span class="deep deep--soon" tabindex="0" data-soon>sovereign data sharing</span> to create both economic and social value.</p>
+      <div class="btn-row">
+        <a class="btn btn-outline" href="#">Learn more <svg viewBox="0 0 24 24" width="14" height="14"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-solid" href="#contact"><svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg> Contact us at info@coe-dsc.nl</a>
+      </div>
+    </div>
+    <aside class="who-side">
+      <div class="side-card side-card--green">
+        <h3>Do you want to stay informed?</h3>
+        <p>Subscribe to the newsletter of the CoE-DSC.</p>
+        <a class="btn btn-solid btn-sm" href="#">Subscribe</a>
+      </div>
+      <div class="side-card side-card--plain">
+        <h3>Digital Product Passports (DPPs)</h3>
+        <p>Centre of Excellence for Digital Product Passports.</p>
+        <a class="btn btn-outline btn-sm" href="#">Visit DPP page</a>
+      </div>
+      <p class="funding">The CoE-DSC is funded by the Dutch Ministry of Economic Affairs. The coordination of activities is the responsibility of the TNO.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="block">
+  <div class="block-inner">
+    <h3 class="block-title dots-title">Insights</h3>
+    <div class="cards">
+      <article class="card">
+        <img src="assets/insight3.png" alt="">
+        <div class="card-body">
+          <span class="tag">Webinar</span>
+          <h4>Webinar OTRA-D: an ontology for transparent risk-driven dependability analysis of cloud services</h4>
+          <p>Claus Pahl from the Free University of Bozen-Bolzano and Giulia Biagioni from CoE-DSC/TNO recently won a Best Paper Award for their research on OTRA-D. On 9 November, they hosted a webinar on this topic.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/insight2.png" alt="">
+        <div class="card-body">
+          <span class="tag">Interview</span>
+          <h4>Connecting the Netherlands and Europe: how CoE-DSC and DSSC accelerate data sharing together</h4>
+          <p>While the CoE-DSC strengthens the Dutch data sharing community, DSSC supports the development and interoperability of data spaces at European level. How do their roles complement each other?</p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/insight1.png" alt="">
+        <div class="card-body">
+          <span class="tag">News</span>
+          <h4>Foreign sanctions pressure exposes digital dependencies</h4>
+          <p>The Dutch government has responded to concerns about European organisations' dependence on foreign digital services. The response highlights the importance of digital sovereignty and ensuring continuity of essential digital infrastructure.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE CASES ============ -->
+<section class="block block--tint">
+  <div class="block-inner">
+    <h3 class="block-title dots-title">Use cases</h3>
+    <div class="cards">
+      <article class="card">
+        <img src="assets/uc1.jpg" alt="">
+        <div class="card-body">
+          <h4>Combining AI Entity Resolution with MPC to help combatting financial crime</h4>
+          <p>Together with participants Knights Analytics and Roseman Labs, we examined the application of Artificial Intelligence Entity Resolution technology to help combat financial crime.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/uc2.jpg" alt="">
+        <div class="card-body">
+          <h4>Cross Sectoral data sharing for E-mobility (CCAM)</h4>
+          <p>This use case was initiated in collaboration with the Data Sharing Coalition, one of the founding partners of the CoE-DSC.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/uc3.jpg" alt="">
+        <div class="card-body">
+          <h4>Exploration of Personal Data Spaces for commons</h4>
+          <p>The Amsterdam Commons, Post Platforms Foundation, Schluss, and the CoE-DSC are collaboratively exploring personal data spaces to establish data sovereignty for commons.</p>
+        </div>
+      </article>
+    </div>
+    <div class="center"><a class="btn btn-outline" href="#">More use cases <svg viewBox="0 0 24 24" width="14" height="14"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section class="block">
+  <div class="block-inner">
+    <h3 class="block-title dots-title">Events &amp; Webinars</h3>
+    <ul class="events">
+      <li><time>March 9, 2027 – March 10, 2027</time><span>Data Spaces Symposium 2027 Value at Scale, Trust by Design</span></li>
+      <li><time>January 12, 2027</time><span>Data Union Conference</span></li>
+      <li><time>January 12, 2027</time><span>Data &amp; Supply Chain Working Day for the Agri-food Sector</span></li>
+      <li><time>December 10</time><span>Simpl Annual Community Event 2026</span></li>
+      <li><time>December 2 – December 3</time><span>Cloud Expo</span></li>
+      <li><time>November 30 – December 3</time><span>Innovation Mission to France: Artificial Intelligence (AI)</span></li>
+    </ul>
+    <div class="center"><a class="btn btn-outline" href="#">All events &amp; webinars <svg viewBox="0 0 24 24" width="14" height="14"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ COMMUNITY + NEWSLETTER ============ -->
+<section class="block block--tint">
+  <div class="block-inner two-col">
+    <div>
+      <h3 class="block-title dots-title">Our community</h3>
+      <p>Would you like to join our community? Please contact us at <a href="mailto:info@coe-dsc.nl">info@coe-dsc.nl</a>.</p>
+    </div>
+    <div class="newsletter">
+      <h3>Do you want to stay informed?</h3>
+      <p>A lot is happening in the field of data sharing and cloud. Stay informed about our activities and relevant news and events. Subscribe to the newsletter of the Centre of Excellence for Data Sharing &amp; Cloud (CoE-DSC).</p>
+      <a class="btn btn-solid" href="#">Subscribe to the CoE-DSC newsletter</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="block">
+  <div class="block-inner faq">
+    <h3 class="block-title dots-title">Frequently Asked Questions</h3>
+    <details><summary>What is the added value of CoE-DSC?</summary><p>The CoE-DSC brings together knowledge, tools, use cases and expertise on data sharing and cloud in one central hub in the Netherlands.</p></details>
+    <details><summary>Where can I find the data sharing tools &amp; guidelines?</summary><p>In the knowledge base on this website.</p></details>
+    <details><summary>Why join the CoE-DSC community?</summary><p>To connect with peers, share experiences and stay informed about developments in data sharing and cloud.</p></details>
+    <details><summary>Are there any costs associated with becoming part of the CoE-DSC community?</summary><p>Please contact us at info@coe-dsc.nl for details.</p></details>
+    <details><summary>How can I join the CoE-DSC community?</summary><p>Contact us at info@coe-dsc.nl.</p></details>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <img src="assets/logo-coe-dsc-white.svg" alt="CoE DSC">
+    <p>Contact us at <a href="mailto:info@coe-dsc.nl">info@coe-dsc.nl</a><br>
+    The CoE-DSC is funded by the Dutch Ministry of Economic Affairs. The coordination of activities is the responsibility of the TNO.</p>
+    <p class="poc-note">Proof of concept – AI integration demo. Not the official CoE-DSC website.</p>
+  </div>
+</footer>
+
+<!-- ============ HOVER TOOLTIP ============ -->
+<div class="tip" id="tip" role="tooltip" hidden>
+  <p id="tipText"></p>
+  <button type="button" class="tip-more" id="tipMore">Learn more <svg viewBox="0 0 24 24" width="13" height="13"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</div>
+
+<!-- ============ DEEP-DIVE MODAL ============ -->
+<div class="backdrop" id="backdrop" hidden></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+  <div class="modal-scroll">
+    <div class="modal-content">
+      <span class="modal-kicker">Deep dive</span>
+      <h2 id="modalTitle">Trust mechanisms</h2>
+
+      <h3>Why they matter</h3>
+      <p>Sharing data between organisations — especially sensitive data between parties that may not know each other — only works when all participants are confident that data is used according to agreed conditions and that misuse is prevented. Trust mechanisms are what turn that confidence from an assumption into an enforceable, verifiable reality. They are foundational to data sovereignty: without them, data sharing and the data economy simply won't take off <span class="cite">(Bernadette Farias Lóscio, CoE-DSC/TNO)</span>.</p>
+
+      <h3>What trust mechanisms include</h3>
+      <ul class="checks">
+        <li><strong>Identity &amp; attestation management</strong> — ensuring participants are who they say they are</li>
+        <li><strong>Definition and enforcement of usage and access policies</strong> — data used only under pre-defined conditions</li>
+        <li><strong>Legally binding data sharing agreements and contracts</strong></li>
+        <li><strong>Transparency, tracing and auditing</strong> — monitoring adherence to agreed standards</li>
+        <li><strong>Accreditation of trust service providers</strong></li>
+        <li><strong>Onboarding and certification of participants</strong></li>
+      </ul>
+      <p>Together, these form the backbone of a trustworthy data infrastructure in which participants know what to expect and can share data with confidence that it will not be misused. Trust operates at multiple layers: peer-to-peer between participants, in the underlying technology, and in the overarching governance rules and their enforcement.</p>
+
+      <h3>Relevant resources on coe-dsc.nl</h3>
+      <ul class="resources">
+        <li><a href="https://coe-dsc.nl/trust-frameworks-the-backbone-of-sovereign-data-sharing/" target="_blank" rel="noopener"><strong>Trust frameworks: the backbone of sovereign data sharing</strong></a> — CoE-DSC's accessible article explaining exactly what trust mechanisms are and why they matter.</li>
+        <li><a href="https://coe-dsc.nl/wp-content/uploads/2026/01/CoE-DSC-Cross-Cutting-Trust-Frameworks-to-support-Data-Sharing-across-Communities.pdf" target="_blank" rel="noopener"><strong>Cross-Cutting Trust Frameworks to Support Data Sharing Across Communities</strong></a> — whitepaper on harmonising trust mechanisms across data spaces for cross-sector and cross-border sharing <span class="pdf">PDF</span></li>
+        <li><a href="https://coe-dsc.nl/wp-content/uploads/2025/12/CoE-DSC-Towards-a-Comprehensive-Evaluation-of-Trust-Frameworks-for-Data-Spaces-1.pdf" target="_blank" rel="noopener"><strong>Towards a Comprehensive Evaluation of Trust Frameworks for Data Spaces</strong></a> — methodology for assessing trust frameworks (37 capability requirements, 27 operational requirements), built on the data sharing trust triangle of empathy, dependability and integrity <span class="pdf">PDF</span></li>
+        <li><a href="https://coe-dsc.nl/wp-content/uploads/2026/01/CoE-DSC-The-Need-and-Role-for-Neutral-Orchestrators-of-Cross-Community-Trust-Frameworks-Call-to-Action.pdf" target="_blank" rel="noopener"><strong>The Need and Role for Neutral Orchestrators of Cross-Community Trust Frameworks</strong></a> — a call to action on who should lead harmonised trust mechanisms <span class="pdf">PDF</span></li>
+        <li><a href="https://coe-dsc.nl/wp-content/uploads/2025/12/CoE-DSC-A-Participant-Driven-Data-Sharing-Model-for-Data-Spaces-1.pdf" target="_blank" rel="noopener"><strong>A Participant-Driven Data Sharing Model for Data Spaces</strong></a> — a research paper introducing the Common Carrier Layer as an enabler for bilateral trusted data sharing relationships <span class="pdf">PDF</span></li>
+      </ul>
+
+      <p class="sources">Sources: the CoE-DSC article "Trust frameworks: the backbone of sovereign data sharing", the report "Towards a Comprehensive Evaluation of Trust Frameworks for Data Spaces" and the whitepaper "Cross-Cutting Trust Frameworks to Support Data Sharing Across Communities" — all from the Public knowledge library.</p>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
